@@ -1,34 +1,35 @@
-﻿@model List<BookStore.ViewModels.BookViewModel>
+﻿@model List<BookStore.ViewModels.StaffPicViewModel>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 <section id="hero" class="d-flex align-items-center justify-content-center breadcrumbSec">
     <div class="container position-relative">
-        <h1>Books</h1>        
+        <h1>Books</h1>
     </div>
 </section>
 <div class="container">
     <div class="row">
+        <div class="col-md-6"> <a class="btn btn-primary" href="/Admin/Selection/Add"><span class="fa fa-plus"></span> Add New List</a></div>
+        <div class="col-md-6"><input type="text" placeholder="Search" /></div>
+
         <div class="col-md-12">
             <table class="table table-striped mt-3">
                 <thead>
                     <tr>
-                        <th scope="col">Cover Image</th>
                         <th scope="col">Title</th>
-                        <th scope="col">Price</th>
+                        <th scope="col">No of books in list</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var book in Model)
+                    @foreach (var staffpic in Model)
                     {
                         <tr class="align-middle">
-                            <td><img class="tableImage" src="~/UploadedFiles/@book.ImageName" /></td>
-                            <td>@book.Title</td>
-                            <td>@book.Price $</td>
+                            <td>@staffpic.Title</td>
+                            <td>@staffpic.StaffPicBooks.Count</td>
                             <td>
                                 <a href="#" title="edit"><span class="fa fa-pencil-square"></span></a>
-                                <a href="#" title="add to staffPics"><span class="fa fa-plus-square"></span></a>
+                                <a href="#" title="add a book to list"><span class="fa fa-plus-square"></span></a>
                             </td>
                         </tr>
                     }

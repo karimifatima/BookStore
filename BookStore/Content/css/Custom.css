@@ -64,6 +64,7 @@ section { padding: 60px 0;}
 .breadcrumbSec#hero {height: 30vh;} 
 #hero:before {content: "";background: rgba(45, 53, 69, 0.7);position: absolute;bottom: 0;top: 0;left: 0;right: 0;}
 #hero .container {text-align: center;padding-top: 50px;}
+.breadcrumbSec#hero h1 {font-size: 30px;}
 #hero h1 {margin: 0;font-size: 48px;font-weight: 700;line-height: 56px;color: #fff;}
 #hero h2 {color: #eee;margin: 15px 0 0 0;font-size: 22px;}
 
@@ -85,7 +86,8 @@ section { padding: 60px 0;}
 .services .icon-box h4 a {color: #414c64;transition: ease-in-out 0.3s;}
 .services .icon-box p {line-height: 24px;font-size: 14px;margin-bottom: 0;}
 .services .icon-box:hover {border-color: #fff;box-shadow: 0px 0 35px 0 rgba(0, 0, 0, 0.08);}
-
+/*------------------- Admin Panel -------------------*/
+.tableImage{max-width:80px;}
 /*------------------- Footer -------------------*/
 #footer {
     color: #414c64;
