@@ -1,5 +1,5 @@
-﻿@*@model List<BookStore.ViewModels.BookViewModel>*@
-@{
+﻿@{
+    ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 <section id="hero" class="d-flex align-items-center justify-content-center">
@@ -10,18 +10,18 @@
 </section>
 
 <section class="services" id="homeSec">
-    <div class="container">
+    <div class="container pb-3" v-for="staffpic in staffpics">
 
         <div class="section-title">
-            <h2>Services 1</h2>
+            <h2 v-text="staffpic.Title"></h2>
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-6" v-for="book in books">
+            <div class="col-lg-4 col-md-6" v-for="pic in staffpic.StaffPicBooks">
                 <div class="icon-box">
-                    <img class="w-50" :src="'/UploadedFiles/' + book.ImageName" />
-                    <h4><a href="#" v-text="book.Title"></a></h4>
-                    <p v-text="book.Price + '$'"></p>
+                    <img class="w-50" :src="'/UploadedFiles/' + pic.Book.ImageName" />
+                    <h4><a href="#" v-text="pic.Book.Title"></a></h4>
+                    <p v-text="pic.Book.Price + '$'"></p>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
         var vm = new Vue({
             el: '#homeSec',
             data: {
-                books: [],
+                staffpics: [],
             },
             mounted: function () {
                 var self = this;
@@ -43,7 +43,7 @@
                     method: 'GET',
                     contentType: "application/json"
                 }).done(function (res) {
-                    if (res.Success) { self.books = res.CustomResult;}
+                    if (res.Success) { self.staffpics = res.CustomResult;}
                     else console.log(res);
                 })
                 .fail(function (res) {

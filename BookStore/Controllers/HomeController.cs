@@ -32,7 +32,7 @@ namespace BookStore.Controllers
         [Route("index")]
         public async Task<ActionResult> Index()
         {
-            //Test to findout if dbContext is scoped or not
+            //Test to findout if dbContext is instantiated for scope or per call
             var books = await _books.GetAllAsync();
             var staffPics = await _staffPics.GetAllAsync();
 
@@ -42,8 +42,8 @@ namespace BookStore.Controllers
         [Route("GetStaffPics")]
         public async Task<ActionResult> GetStaffPics()
         {
-            var books = await _books.GetAllAsync();
-            var results = _mapper.Map<IList<BookViewModel>>(books);            
+            var staffPics = await _staffPics.GetAllAsync();
+            var results = _mapper.Map<IList<StaffPicViewModel>>(staffPics);            
 
             return Json(new JsonResultViewModel { Success = true, Message = "", CustomResult = results }, JsonRequestBehavior.AllowGet);
         }

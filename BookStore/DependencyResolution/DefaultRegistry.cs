@@ -39,7 +39,6 @@ namespace BookStore.DependencyResolution
                     scan.WithDefaultConventions();
                     scan.With(new ControllerConvention());
                 });
-            //For<DatabaseContext>().Use<DatabaseContext>();
             For<IGenericRepository<Book>>().Use<GenericRepository<Book>>();
             For<IGenericRepository<StaffPic>>().Use<StaffPicRepository>();
 
@@ -48,7 +47,7 @@ namespace BookStore.DependencyResolution
                 cfg.CreateMap<Models.Book, ViewModels.BookViewModel>().ReverseMap();
                 cfg.CreateMap<Models.StaffPic, ViewModels.StaffPicViewModel>().ReverseMap();
                 cfg.CreateMap<Models.StaffPic, ViewModels.CreateStaffPicViewModel>().ReverseMap();
-                cfg.CreateMap<Models.StaffPicBook, ViewModels.StaffPicViewModel>().ReverseMap();
+                cfg.CreateMap<Models.StaffPicBook, ViewModels.StaffPicBookViewModel>().ReverseMap();
             });
 
             var mapper = config.CreateMapper();

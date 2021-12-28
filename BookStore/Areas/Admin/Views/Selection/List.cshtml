@@ -2,39 +2,124 @@
 @{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-<section id="hero" class="d-flex align-items-center justify-content-center breadcrumbSec">
-    <div class="container position-relative">
-        <h1>Staff Pics </h1>
-    </div>
-</section>
-<div class="container">
-    <div class="row mt-4">
-        <div class="col-md-8"> <a class="btn btn-primary" href="/Admin/Selection/AddUpdate"><span class="fa fa-plus"></span> Add New List</a></div>
-        <div class="col-md-4"><input type="text" class="form-control" placeholder="Search..." /></div>
+<div id="StaffPics">
+    <section id="hero" class="d-flex align-items-center justify-content-center breadcrumbSec">
+        <div class="container position-relative">
+            <h1>Staff Pics </h1>
+        </div>
+    </section>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-8"> <a class="btn btn-primary" href="/Admin/Selection/AddUpdate"><span class="fa fa-plus"></span> Add New List</a></div>
+            <div class="col-md-4"><input type="text" v-model="filter" class="form-control" placeholder="Search..." v-on:keyup.enter="loadData" /></div>
 
-        <div class="col-md-12">
-            <table class="table table-striped mt-3">
-                <thead>
-                    <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Number of books</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var staffpic in Model)
-                    {
-                        <tr class="align-middle">
-                            <td>@staffpic.Title</td>
-                            <td>@staffpic.StaffPicBooks.Count</td>
+            <div class="col-md-12">
+                <table class="table table-striped mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Number of books</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="align-middle" v-for="staffpic in staffPics">
+                            <td v-text="staffpic.Title"></td>
+                            <td v-text="staffpic.StaffPicBooks.lenght"></td>
                             <td>
-                                <a href="/Admin/Selection/AddUpdate/@staffpic.Id" title="edit"><span class="fa fa-pencil-square"></span></a>
-                                <a href="#" title="add a book to list"><span class="fa fa-plus-square"></span></a>
+                                <span class="fa fa-plus-square" @@click="openModal(staffpic)" title="add a book to list"></span>
                             </td>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="BooksModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Select Books</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <section v-for="(book,index) in books" class="checkbox-custom chekbox-default p-1">
+                        <input v-model="selectedBooksIds" :value="book.Id" type="checkbox" />
+                        <img class="w20" :src="'/UploadedFiles/' + book.ImageName" />
+                        <label v-text="book.Title"></label>
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" @@click="updateSelection()">Add Books</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script>
+        var vm = new Vue({
+            el: '#StaffPics',
+            data: {
+                books: [],
+                staffPics: [],
+                selectedBooksIds: [],
+                selectedList: null,
+                filter: ''
+            },
+            mounted: function () {
+                this.loadData();
+            },
+            methods: {
+                loadData: function () {
+                    var url = '/Admin/Selection/GetAll';
+                    if (this.filter != '')
+                        url += '/' + this.filter;
+                    $.ajax({
+                        url: url,
+                        method: 'GET',
+                        contentType: "application/json"
+                    }).done(function (res) {
+                        if (res.Success) {
+                            vm.books = res.CustomResult.booksVm;
+                            vm.staffPics = res.CustomResult.staffPicsVm;
+                        }
+                        else console.log(res);
+                    })
+                        .fail(function (res) {
+                            console.log(res);
+                        });
+                },
+                openModal: function (staffPic) {
+                    this.selectedList = staffPic;
+                    this.selectedBooksIds = staffPic.StaffPicBooks.map((item) => {
+                        return item.BookId;
+                    });
+                    $("#BooksModal").modal("show");
+                },
+                updateSelection: function () {
+                    var dataObject = { bookIds: this.selectedBooksIds, staffPicId: this.selectedList.Id };
+
+                    $.ajax({
+                        url: '/Admin/Selection/UpdateSelection',
+                        method: 'POST',
+                        contentType: "application/json",
+                        data: JSON.stringify(dataObject)
+                    }).done(function (res) {
+                        if (res.Success) { $("#BooksModal").modal("hide"); }
+                        else console.log(res);
+                        vm.loadData();
+                    })
+                        .fail(function (res) {
+                            console.log(res);
+                            vm.loadData();
+                        });
+                }
+            }
+        });
+    </script>
+}
