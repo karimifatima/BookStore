@@ -11,5 +11,6 @@ namespace BookStore.ViewModels
         public string Title { get; set; }
         public string Summary { get; set; }
         public string Price { get; set; }
+        public string ImageName { get; set; }
     }
 }

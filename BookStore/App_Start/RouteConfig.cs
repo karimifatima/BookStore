@@ -11,6 +11,7 @@ namespace BookStore
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.Clear();
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapMvcAttributeRoutes();

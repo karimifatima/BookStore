@@ -27,7 +27,7 @@ namespace BookStore.Models
             base.OnModelCreating(builder);
 
             //Seeds
-            //Database.SetInitializer(new BookDBInitializer());
+            Database.SetInitializer(new BookDBInitializer());
         }
 
         public DbSet<Book> Books { get; set; }
