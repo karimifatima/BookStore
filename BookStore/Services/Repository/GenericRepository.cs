@@ -71,10 +71,6 @@ namespace BookStore.Repository
             return await query.AsNoTracking().ToListAsync();
         }
 
-        public Task<IList<T>> GetAll(Expression<Func<T, bool>> expression = null, Func<IQueryable, IOrderedQueryable> orderby = null, List<string> includes = null)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Insert(T entity)
         {

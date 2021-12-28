@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace BookStore.Controllers
 {
+    [RoutePrefix("Home")]
     public class HomeController : Controller
     {
         private readonly IGenericRepository<StaffPic> _staffPics;
@@ -21,8 +22,8 @@ namespace BookStore.Controllers
             _staffPics = staffPics;
             _mapper = mapper;
 
-            staffPics.GetAllAsync();
-            x.GetAllAsync();
+            //staffPics.GetAllAsync();
+            //x.GetAllAsync();
         }
 
         [Route("~/")]

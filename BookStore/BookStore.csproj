@@ -113,6 +113,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\Custom.css" />
+    <Content Include="Content\fonts\Fontawesome\fontawesome-webfont.svg" />
+    <Content Include="Content\images\banner.jpg" />
+    <Content Include="Content\scripts\main.js" />
+    <Content Include="Content\vendor\bootstrap.bundle.min.js" />
+    <Content Include="Content\vendor\bootstrap.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -150,8 +156,15 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="Areas\Admin\Views\Book\List.cshtml" />
+    <Content Include="Content\fonts\Fontawesome\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\Fontawesome\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\Fontawesome\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\Fontawesome\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
