@@ -22,8 +22,8 @@ namespace BookStore.Repository
         }
 
         protected virtual IQueryable<T> GetQueryable()
-        {           
-                return _db;           
+        {
+            return _db;
         }
 
         public async Task Delete(int id)
@@ -83,9 +83,9 @@ namespace BookStore.Repository
             _context.Entry(entity).State = EntityState.Modified;
         }
 
-        public async void SaveChangesAsync()
+        public async Task<int> SaveChangesAsync()
         {
-            await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();
         }
     }
 }

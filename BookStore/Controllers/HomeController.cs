@@ -25,9 +25,6 @@ namespace BookStore.Controllers
             _staffPics = staffPics;
             _books = book;
             _mapper = mapper;
-
-            //staffPics.GetAllAsync();
-            //x.GetAllAsync();
         }
 
         [Route("~/")]
@@ -35,9 +32,9 @@ namespace BookStore.Controllers
         [Route("index")]
         public async Task<ActionResult> Index()
         {
-            //var books = await _staffPics.GetAllAsync();
-            //var results = _mapper.Map<IList<StaffPicViewModel>>(books);
-
+            //Test to findout if dbContext is scoped or not
+            var books = await _books.GetAllAsync();
+            var staffPics = await _staffPics.GetAllAsync();
 
             return View();
         }

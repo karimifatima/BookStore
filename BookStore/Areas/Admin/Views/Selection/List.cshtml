@@ -4,20 +4,20 @@
 }
 <section id="hero" class="d-flex align-items-center justify-content-center breadcrumbSec">
     <div class="container position-relative">
-        <h1>Books</h1>
+        <h1>Staff Pics </h1>
     </div>
 </section>
 <div class="container">
-    <div class="row">
-        <div class="col-md-6"> <a class="btn btn-primary" href="/Admin/Selection/Add"><span class="fa fa-plus"></span> Add New List</a></div>
-        <div class="col-md-6"><input type="text" placeholder="Search" /></div>
+    <div class="row mt-4">
+        <div class="col-md-8"> <a class="btn btn-primary" href="/Admin/Selection/AddUpdate"><span class="fa fa-plus"></span> Add New List</a></div>
+        <div class="col-md-4"><input type="text" class="form-control" placeholder="Search..." /></div>
 
         <div class="col-md-12">
             <table class="table table-striped mt-3">
                 <thead>
                     <tr>
                         <th scope="col">Title</th>
-                        <th scope="col">No of books in list</th>
+                        <th scope="col">Number of books</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -28,7 +28,7 @@
                             <td>@staffpic.Title</td>
                             <td>@staffpic.StaffPicBooks.Count</td>
                             <td>
-                                <a href="#" title="edit"><span class="fa fa-pencil-square"></span></a>
+                                <a href="/Admin/Selection/AddUpdate/@staffpic.Id" title="edit"><span class="fa fa-pencil-square"></span></a>
                                 <a href="#" title="add a book to list"><span class="fa fa-plus-square"></span></a>
                             </td>
                         </tr>

@@ -31,5 +31,29 @@ namespace BookStore.Areas.Admin.Controllers
             var results = _mapper.Map<IList<StaffPicViewModel>>(staffPics);
             return View(results);
         }
+
+        [Route("AddUpdate")]
+        public ActionResult AddUpdate()
+        {
+            return View(new CreateStaffPicViewModel());
+        }
+
+        [HttpPost]
+        [Route("AddUpdate")]
+        public async Task<ActionResult> AddUpdate(CreateStaffPicViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            var staffPic = new StaffPic();
+            _mapper.Map(vm, staffPic);
+
+            _staffPic.Insert(staffPic);
+            await _staffPic.SaveChangesAsync();
+
+            return RedirectToAction("List");
+        }
     }
 }

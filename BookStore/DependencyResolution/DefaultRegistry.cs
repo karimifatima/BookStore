@@ -47,13 +47,13 @@ namespace BookStore.DependencyResolution
             {
                 cfg.CreateMap<Models.Book, ViewModels.BookViewModel>().ReverseMap();
                 cfg.CreateMap<Models.StaffPic, ViewModels.StaffPicViewModel>().ReverseMap();
+                cfg.CreateMap<Models.StaffPic, ViewModels.CreateStaffPicViewModel>().ReverseMap();
                 cfg.CreateMap<Models.StaffPicBook, ViewModels.StaffPicViewModel>().ReverseMap();
             });
 
             var mapper = config.CreateMapper();
 
             For<IMapper>().Use(mapper);
-
         }
 
         #endregion

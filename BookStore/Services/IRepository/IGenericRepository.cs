@@ -22,6 +22,6 @@ namespace BookStore.IRepository
         Task Delete(int id);
 
         void Update(T entity);
-        void SaveChangesAsync();
+        Task<int> SaveChangesAsync();
     }
 }
